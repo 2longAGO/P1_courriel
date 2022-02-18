@@ -51,6 +51,7 @@ document.getElementById("btnSend").onclick = function() {
 
 // functions
 function setup() {
+    localStorage.clear();  //Active cette ligne pour du debug
     loadRecepients();
     myName = localStorage.getItem('myName')
     if(!myName){
@@ -84,8 +85,8 @@ function loadRecepients(toSearch=''){
     let storedNames = parseData("names");
     if(storedNames){
         for (let i = 0; i < storedNames.length; i++) {
-            if(storedNames[i].includes(toSearch) || toSearch===''){
-                formatRecipient(storedNames[i]);
+            if(storedNames[i].name.includes(toSearch) || toSearch===''){
+                formatRecipient(storedNames[i].name);
             }
         }
         const currList = document.getElementById("userBox").children;
@@ -167,6 +168,7 @@ function loadMessages(name,toSearch=''){
             users[i].setAttribute("style","background-color: initial");
     }
     let messages = parseData(name);
+    console.log("Success!" + JSON.stringify(messages));
     if(messages){
         for (let i = 0; i < messages.length; i++) {
             const element = messages[i].split('\0');
@@ -241,11 +243,11 @@ function formatMessage(msgType,msgData) {
 */
 
 function saveMessage(msgType,msgData,recName){
-    savetoArray(recName,msgType.toString()+'\0'+msgData);
+    saveMessageToArray(recName,msgType.toString()+'\0'+msgData);
 }
 
 function saveRecipient(toSave){
-    savetoArray("names",toSave);
+    saveRecipientToArray("names",toSave);
 }
 
 function deleteRecipient(toDel){
@@ -256,7 +258,15 @@ function deleteRecipient(toDel){
     loadRecepients();
 }
 
-function savetoArray(name,data){
+function saveRecipientToArray(name,data){
+    let saveArray = getArray(name);
+    let stringName = data;
+    data = {"name": stringName, "publicKey": createPublicKey()};
+    saveArray.push(data);
+    localStorage.setItem(name,JSON.stringify(saveArray));
+}
+
+function saveMessageToArray(name,data){
     let saveArray = getArray(name);
     saveArray.push(data);
     localStorage.setItem(name,JSON.stringify(saveArray));
@@ -278,4 +288,17 @@ function parseData(key){
         data = null
     }
     return data;
+}
+
+function createPublicKey(){
+    const charString = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charArray = charString.split('');
+    var publicKey = ""
+
+    for(let i = 0; i < 15; i++){
+        var newChar = charArray[Math.floor(Math.random()*charArray.length)]
+        publicKey = publicKey + newChar;
+    }
+
+    return publicKey;
 }
