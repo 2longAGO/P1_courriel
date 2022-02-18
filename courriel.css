@@ -4,24 +4,7 @@
 }
 
 .panel{
-    height: 30em;
-}
-
-.bottomBar {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-}
-.textBar {
-    width: 90%;
-    height: 1em;
-    resize:none;    
-}
-.searchBar {
-    width: 45%;
-    height: 1em;
-    resize:none; 
+    height: 100vh;
 }
 
 .myMessage {
@@ -56,12 +39,33 @@
     overflow-y: auto;
 }
 
+.bottomBar {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.textBar {
+    width: 90%;
+    height: 1em;
+    resize:none;    
+}
+
+.searchBar {
+    width: 45%;
+    height: 1em;
+    resize:none; 
+}
+
+.searchBarM {
+    width: 85%;
+    height: 1em;
+    resize:none; 
+}
 /*
     Make the 3 panels drop too two below a certain width
     the 1 below a certain width
 */
-
-
-
 
 /* Message that JP have added!!!*/
