@@ -249,9 +249,9 @@ function formatMessage(msgType,msgData) {
     newElement.className = types[msgType];
     let array = msgData.split('\n');
     let width = 0;
-    for (let i = 0; i < array.length; i++) {
-        width = (array[i].length > width) ? array[i].length : width ;
-    }
+    array.forEach(function(item) {
+        width = (item.length > width) ? item.length : width ;
+    });
     newElement.setAttribute("cols",(width).toString());
     newElement.setAttribute("rows",(array.length-1).toString());
     newElement.addEventListener("keypress", function(event) {
