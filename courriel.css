@@ -22,6 +22,7 @@
     display: list-item;
     word-break: break-all;
     border-radius: 0.2em;
+    min-height: 2em;
     max-width: 100%;
     caret-color: transparent;
     resize:none;    
@@ -55,15 +56,45 @@
 .searchBar {
     height: 1em;
     resize:none; 
+    width: 85%;
 }
 
 .rightButton{
     position: absolute;
     right: 0;
 }
-/*
-    Make the 3 panels drop too two below a certain width
-    the 1 below a certain width
-*/
+
+@media only screen and (max-width: 1177px) {
+    .mobileHideC{
+        width: 10%;
+    }
+    .mobileHideR{
+        visibility: visible;
+        width: 90%;
+    }
+    .mobileHideM{
+        visibility: collapse;
+        width: 0%;
+    }
+    #btnSwitch{
+        visibility: visible;
+    }
+}
+@media screen and (min-width: 1178px) {
+    .mobileHideC{
+        width: 5%;
+    }
+    .mobileHideR{
+        visibility: visible;
+        width: 20%;
+    }
+    .mobileHideM{
+        visibility: visible;
+        width: 75%;
+    }
+    #btnSwitch{
+        visibility: hidden;
+    }
+}
 
 /* Message that JP have added!!!*/

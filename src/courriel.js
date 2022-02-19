@@ -21,9 +21,18 @@ document.querySelector('#searchBar2').addEventListener("keydown", function(event
 document.getElementById("btnReset2").onclick = function() {loadMessages(currRecipient);
                                                            document.querySelector('#searchBar2').value='';
                                                         };
-                                                        document.getElementById("btnSearch2").onclick = function() {loadMessages(currRecipient,document.querySelector('#searchBar2').value)};
+document.getElementById("btnSearch2").onclick = function() {loadMessages(currRecipient,document.querySelector('#searchBar2').value)};
 document.getElementById("btnEdit").onclick = function() {editRecepient(currRecipient);};
 document.getElementById("btnDel").onclick = function() {deleteRecipient(currRecipient);};
+document.getElementById("btnSwitch").onclick = function() {
+                                                            let selectors = ['.mobileHideR','.mobileHideM'];
+                                                            let idx = document.querySelector(selectors[0]).style.visibility == 'collapse' ? 0 : 1 ;
+                                                            document.querySelector(selectors[idx]).style.visibility = 'visible';
+                                                            document.querySelector(selectors[idx]).style.width = '90%';
+                                                            document.querySelector(selectors[(idx+1)%2]).style.visibility = 'collapse';
+                                                            document.querySelector(selectors[(idx+1)%2]).style.width = '0%';
+                                                            
+};
 textBar.addEventListener("keydown", function(event) {
     // Check if the enter key is pressed in the field
     if (event.key === "Enter"){
