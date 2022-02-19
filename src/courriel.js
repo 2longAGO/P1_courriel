@@ -83,9 +83,9 @@ function resizeTextBar(){
 function loadRecepients(toSearch=''){
     clearChildren(document.getElementById("userBox"));
     let storedNames = parseData("names");
-    if(storedNames.name){
+    if(storedNames != null){
         for (let i = 0; i < storedNames.length; i++) {
-            if(storedNames[i].name.includes(toSearch) || toSearch===''){
+            if(storedNames[i].name.includes(toSearch) || toSearch==''){
                 formatRecipient(storedNames[i].name);
             }
         }
@@ -114,6 +114,15 @@ function addRecepient() {
         }
     }
     else {
+        let storedNames = getArray("names");
+        if(storedNames){
+            for (let i = 0; i < storedNames.length; i++) {
+                if(storedNames[i].name==newName){
+                    alert("This recipient already exists!");
+                    return;
+                }
+            }
+        }
         // Save to name array
         saveRecipient(newName);
 
@@ -156,13 +165,12 @@ function formatRecipient(toFormat){
     newElement.className = "userli";
     newElement.setAttribute("onclick",'loadMessages("'+toFormat+'")');
     newElement.textContent = toFormat;
-    document.getElementById("userBox").appendChild(newElement);
-
     let newButton = document.createElement("button")
     newButton.setAttribute("onclick", 'showPublicKey("'+toFormat+'", false)');
     newButton.className = "rightButton";
     newButton.textContent = "Show Public Key";
     newElement.appendChild(newButton);
+    document.getElementById("userBox").appendChild(newElement);
     showPublicKey(toFormat, true);
 }
 
@@ -285,9 +293,9 @@ function saveMessageToArray(name,data){
 }
 
 function getArray(name) {
-    let saveArray = parseData(name);
-    if(!saveArray) saveArray = new Array;
-    return saveArray;
+    let loadArray = parseData(name);
+    if(!loadArray) loadArray = new Array;
+    return loadArray;
 }
 
 function parseData(key){
@@ -321,7 +329,7 @@ function showPublicKey(recipient, onLoad){
     let recipientObj;
     let recipientObjIndex;
     let recipientListIndex;
-
+    
     for(let i = 0; i < recipientArray.length; i++){
         if (recipient == recipientArray[i].name){
             recipientObj = recipientArray[i];
