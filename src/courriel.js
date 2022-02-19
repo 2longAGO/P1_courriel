@@ -305,11 +305,11 @@ function parseData(key){
 function createPublicKey(){
     const charString = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const charArray = charString.split('');
-    var publicKey = ""
+    let publicKey = ""
 
     for(let i = 0; i < 15; i++){
-        var newChar = charArray[Math.floor(Math.random()*charArray.length)]
-        publicKey = publicKey + newChar;
+        let newChar = charArray[Math.floor(Math.random()*charArray.length)]
+        publicKey += newChar;
     }
 
     return publicKey;
@@ -320,59 +320,36 @@ function showPublicKey(recipient, onLoad){
     let recipientArray = getArray("names");
     let recipientObj;
     let recipientObjIndex;
+    let recipientListIndex;
 
     for(let i = 0; i < recipientArray.length; i++){
         if (recipient == recipientArray[i].name){
             recipientObj = recipientArray[i];
             recipientObjIndex = i;
         }
+        if (i < users.length && users[i].childNodes[0].textContent == recipient){
+            recipientListIndex = i;
+        }
     }
-
     ///if publicKeyVisible = false, show the public, change the button text and set publicKeyVisible = true
     ///if publicKeyVisible = true, hide the public, change the button text and set publicKeyVisible = false
     ///take in account if the function by the function load recipient via the onLoad parameter
-    if(onLoad && !recipientObj.publicKeyVisible){
-        for (let i = 0; i < users.length; i++) {
-            if(users[i].childNodes[0].textContent == recipient){
-                users[i].querySelector("button").textContent = "Show Public Key"
-                return;
-            }
-        }
-    }
-    else if(onLoad && recipientObj.publicKeyVisible){
-        for (let i = 0; i < users.length; i++) {
-            if(users[i].childNodes[0].textContent == recipient){
-                users[i].querySelector("button").textContent = "Hide Public Key"
-                let newP = document.createElement("p");
-                newP.textContent = "Public Key: " + recipientArray[recipientObjIndex].publicKey;
-                users[i].appendChild(newP);
-                return;
-            }
-        }
-    }
-    else if(!recipientObj.publicKeyVisible){
-        for (let i = 0; i < users.length; i++) {
-            if(users[i].childNodes[0].textContent == recipient){
-                users[i].querySelector("button").textContent = "Hide Public Key"
-                let newP = document.createElement("p");
-                newP.textContent = "Public Key: " + recipientArray[recipientObjIndex].publicKey;
-                users[i].appendChild(newP);
-                recipientObj.publicKeyVisible = true;
-                recipientArray[recipientObjIndex] = recipientObj;
-                break;
-            }
-        }
+    if(onLoad?!recipientObj.publicKeyVisible:recipientObj.publicKeyVisible){
+        users[recipientListIndex].querySelector("button").textContent = "Show Public Key";
+        if(!onLoad)
+            users[recipientListIndex].querySelector("p").remove();
     }
     else{
-        for (let i = 0; i < users.length; i++) {
-            if(users[i].childNodes[0].textContent == recipient){
-                users[i].querySelector("button").textContent = "Show Public Key"
-                users[i].querySelector("p").remove();
-                recipientObj.publicKeyVisible = false;
-                recipientArray[recipientObjIndex] = recipientObj;
-                break;
-            }
-        }
+        users[recipientListIndex].querySelector("button").textContent = "Hide Public Key"
+        let newP = document.createElement("p");
+        newP.textContent = "Public Key: " + recipientArray[recipientObjIndex].publicKey;
+        users[recipientListIndex].appendChild(newP);
+    }
+    if(onLoad)
+        return;
+    else{
+        recipientObj.publicKeyVisible = !recipientObj.publicKeyVisible;
+        recipientArray[recipientObjIndex] = recipientObj;
     }
     localStorage.setItem("names",JSON.stringify(recipientArray));
 }
