@@ -47,16 +47,9 @@
     left: 0;
 }
 
-.textBar {
-    width: 90%;
-    height: 1em;
-    resize:none;    
-}
-
 .searchBar {
     height: 1em;
     resize:none; 
-    width: 85%;
 }
 
 .rightButton{
@@ -79,6 +72,17 @@
     #btnSwitch{
         visibility: visible;
     }
+    #searchBar{
+        width: 45%;
+    }
+    #searchBar2{
+        width: 50%;
+    }
+    .textBar {
+        width: 85%;
+        height: 1em;
+        resize:none;    
+    }
 }
 @media screen and (min-width: 1178px) {
     .mobileHideC{
@@ -94,6 +98,20 @@
     }
     #btnSwitch{
         visibility: hidden;
+    }
+    #searchBar{
+        width: 35%;
+    }
+    #searchBar2{
+        width: 80%;
+    }
+    .textBar {
+        width: 92%;
+        height: 1em;
+        resize:none;    
+    }
+    .rBtn{
+        visibility: visible;
     }
 }
 
