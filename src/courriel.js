@@ -51,7 +51,7 @@ document.getElementById("btnSend").onclick = function() {
 
 // functions
 function setup() {
-    localStorage.clear();  //Active cette ligne pour du debug
+    //localStorage.clear();  //Active cette ligne pour du debug
     loadRecepients();
     myName = localStorage.getItem('myName')
     if(!myName){
@@ -92,12 +92,12 @@ function loadRecepients(toSearch=''){
         const currList = document.getElementById("userBox").children;
         if (currList.length >0){
             for (let i = 0; i < currList.length; i++) {
-                if (currRecipient == currList[i].textContent) {
-                    loadMessages(currList[i].textContent);
+                if (currRecipient == currList[i].childNodes[0].textContent) {
+                    loadMessages(currList[i].childNodes[0].textContent);
                     return;
                 }
             }
-            loadMessages(currList[0].textContent);
+            loadMessages(currList[0].childNodes[0].textContent);
         }
         else {
             alert("No result found!");
@@ -130,7 +130,12 @@ function editRecepient(toEdit) {
     }
     else {
         let editArray = getArray("names");
-        editArray.splice(editArray.indexOf(toEdit),1,newName);
+        for(let i = 0; i < editArray.length; i++){
+            console.log(editArray[i].name);
+            if(editArray[i].name == toEdit){
+                editArray[i].name = newName;
+            }
+        }
         localStorage.setItem("names",JSON.stringify(editArray));
         localStorage.setItem(newName,localStorage.getItem(toEdit));
         localStorage.removeItem(toEdit);
@@ -151,6 +156,16 @@ function formatRecipient(toFormat){
     newElement.setAttribute("onclick",'loadMessages("'+toFormat+'")');
     newElement.textContent = toFormat;
     document.getElementById("userBox").appendChild(newElement);
+
+    let newButton = document.createElement("button")
+    newButton.setAttribute("onclick", 'showPublicKey("'+toFormat+'")');
+    newButton.className = "rightButton";
+    newButton.textContent = "Show Public Key";
+    newElement.appendChild(newButton);
+
+    /*let newp = document.createElement("p");
+    newp.textContent = "weu byofiuwebyfqoweiufyybycn/ndw ieufoqilewuyf ewiluf/nwe uujfqwieyufoieuk";
+    newElement.appendChild(newp);*/ // text pour debug
 }
 
 /*
@@ -162,13 +177,12 @@ function loadMessages(name,toSearch=''){
     clearChildren(document.getElementById("chatBox"));
     let users = document.getElementById("userBox").children;
     for (let i = 0; i < users.length; i++) {
-        if(users[i].textContent == name)
+        if(users[i].childNodes[0].textContent == name)
             users[i].setAttribute("style","background-color: blue");
         else
             users[i].setAttribute("style","background-color: initial");
     }
     let messages = parseData(name);
-    console.log("Success!" + JSON.stringify(messages));
     if(messages){
         for (let i = 0; i < messages.length; i++) {
             const element = messages[i].split('\0');
@@ -261,7 +275,7 @@ function deleteRecipient(toDel){
 function saveRecipientToArray(name,data){
     let saveArray = getArray(name);
     let stringName = data;
-    data = {"name": stringName, "publicKey": createPublicKey()};
+    data = {"name": stringName, "publicKey": createPublicKey(), "publicKeyVisible": false};
     saveArray.push(data);
     localStorage.setItem(name,JSON.stringify(saveArray));
 }
@@ -301,4 +315,15 @@ function createPublicKey(){
     }
 
     return publicKey;
+}
+
+function showPublicKey(recepient){
+    let users = document.getElementById("userBox").children;
+    ///Si publicKeyVisible = false, affiche la public key et change le bouton
+    ///Si publicKeyVisible = true, masquer la public key et change le bouton
+    for (let i = 0; i < users.length; i++) {
+        if(users[i].childNodes[0].textContent == recepient){
+            users[i].querySelector("button").textContent = "Hide Public Key"
+        }
+    }
 }

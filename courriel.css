@@ -56,6 +56,11 @@
     height: 1em;
     resize:none; 
 }
+
+.rightButton{
+    position: absolute;
+    right: 0;
+}
 /*
     Make the 3 panels drop too two below a certain width
     the 1 below a certain width
