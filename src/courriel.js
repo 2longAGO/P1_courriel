@@ -114,10 +114,11 @@ function addRecepient() {
         }
     }
     else {
-        // Add to visible list
-        formatRecipient(newName);
         // Save to name array
         saveRecipient(newName);
+
+        // Add to visible list
+        formatRecipient(newName);
     }
 }
 
@@ -158,14 +159,11 @@ function formatRecipient(toFormat){
     document.getElementById("userBox").appendChild(newElement);
 
     let newButton = document.createElement("button")
-    newButton.setAttribute("onclick", 'showPublicKey("'+toFormat+'")');
+    newButton.setAttribute("onclick", 'showPublicKey("'+toFormat+'", false)');
     newButton.className = "rightButton";
     newButton.textContent = "Show Public Key";
     newElement.appendChild(newButton);
-
-    /*let newp = document.createElement("p");
-    newp.textContent = "weu byofiuwebyfqoweiufyybycn/ndw ieufoqilewuyf ewiluf/nwe uujfqwieyufoieuk";
-    newElement.appendChild(newp);*/ // text pour debug
+    showPublicKey(toFormat, true);
 }
 
 /*
@@ -317,13 +315,64 @@ function createPublicKey(){
     return publicKey;
 }
 
-function showPublicKey(recepient){
+function showPublicKey(recipient, onLoad){
     let users = document.getElementById("userBox").children;
-    ///Si publicKeyVisible = false, affiche la public key et change le bouton
-    ///Si publicKeyVisible = true, masquer la public key et change le bouton
-    for (let i = 0; i < users.length; i++) {
-        if(users[i].childNodes[0].textContent == recepient){
-            users[i].querySelector("button").textContent = "Hide Public Key"
+    let recipientArray = getArray("names");
+    let recipientObj;
+    let recipientObjIndex;
+
+    for(let i = 0; i < recipientArray.length; i++){
+        if (recipient == recipientArray[i].name){
+            recipientObj = recipientArray[i];
+            recipientObjIndex = i;
         }
     }
+
+    ///if publicKeyVisible = false, show the public, change the button text and set publicKeyVisible = true
+    ///if publicKeyVisible = true, hide the public, change the button text and set publicKeyVisible = false
+    ///take in account if the function by the function load recipient via the onLoad parameter
+    if(onLoad && !recipientObj.publicKeyVisible){
+        for (let i = 0; i < users.length; i++) {
+            if(users[i].childNodes[0].textContent == recipient){
+                users[i].querySelector("button").textContent = "Show Public Key"
+                return;
+            }
+        }
+    }
+    else if(onLoad && recipientObj.publicKeyVisible){
+        for (let i = 0; i < users.length; i++) {
+            if(users[i].childNodes[0].textContent == recipient){
+                users[i].querySelector("button").textContent = "Hide Public Key"
+                let newP = document.createElement("p");
+                newP.textContent = "Public Key: " + recipientArray[recipientObjIndex].publicKey;
+                users[i].appendChild(newP);
+                return;
+            }
+        }
+    }
+    else if(!recipientObj.publicKeyVisible){
+        for (let i = 0; i < users.length; i++) {
+            if(users[i].childNodes[0].textContent == recipient){
+                users[i].querySelector("button").textContent = "Hide Public Key"
+                let newP = document.createElement("p");
+                newP.textContent = "Public Key: " + recipientArray[recipientObjIndex].publicKey;
+                users[i].appendChild(newP);
+                recipientObj.publicKeyVisible = true;
+                recipientArray[recipientObjIndex] = recipientObj;
+                break;
+            }
+        }
+    }
+    else{
+        for (let i = 0; i < users.length; i++) {
+            if(users[i].childNodes[0].textContent == recipient){
+                users[i].querySelector("button").textContent = "Show Public Key"
+                users[i].querySelector("p").remove();
+                recipientObj.publicKeyVisible = false;
+                recipientArray[recipientObjIndex] = recipientObj;
+                break;
+            }
+        }
+    }
+    localStorage.setItem("names",JSON.stringify(recipientArray));
 }
