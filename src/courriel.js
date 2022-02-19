@@ -83,7 +83,7 @@ function resizeTextBar(){
 function loadRecepients(toSearch=''){
     clearChildren(document.getElementById("userBox"));
     let storedNames = parseData("names");
-    if(storedNames){
+    if(storedNames.name){
         for (let i = 0; i < storedNames.length; i++) {
             if(storedNames[i].name.includes(toSearch) || toSearch===''){
                 formatRecipient(storedNames[i].name);
