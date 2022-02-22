@@ -4,24 +4,7 @@
 }
 
 .panel{
-    height: 30em;
-}
-
-.bottomBar {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-}
-.textBar {
-    width: 90%;
-    height: 1em;
-    resize:none;    
-}
-.searchBar {
-    width: 45%;
-    height: 1em;
-    resize:none; 
+    height: 90vh;
 }
 
 .myMessage {
@@ -39,22 +22,110 @@
     display: list-item;
     word-break: break-all;
     border-radius: 0.2em;
+    min-height: 2em;
     max-width: 100%;
     caret-color: transparent;
     resize:none;    
 }
 
 .userli {
+    display: block;
     border: 1px solid #000;
+    word-wrap:break-word;
     cursor: pointer;
 }
 
 .scrollContainer {
+    position: relative;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
-/*
-    Make the 3 panels drop too two below a certain width
-    the 1 below a certain width
-*/
+.bottomBar {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.searchBar {
+    height: 1em;
+    resize:none; 
+}
+
+.rightButton{
+    position: absolute;
+    right: 0;
+}
+
+@media only screen and (max-width: 1177px) {
+    .mobileHideC{
+        width: 10%;
+    }
+    .mobileHideR{
+        visibility: visible;
+        width: 90%;
+    }
+    .mobileHideM{
+        visibility: collapse;
+        width: 0%;
+    }
+    .textBar {
+        width: 85%;
+        height: 1em;
+        resize:none;    
+    }
+    #btnSwitch{
+        visibility: visible;
+    }
+    #searchBar{
+        width: 45%;
+    }
+    #searchBar2{
+        width: 50%;
+    }
+    #userBox{
+        height:98%;
+    }
+    #chatBox{
+        height:96%;
+    }
+}
+@media screen and (min-width: 1178px) {
+    .mobileHideC{
+        width: 5%;
+    }
+    .mobileHideR{
+        visibility: visible;
+        width: 20%;
+    }
+    .mobileHideM{
+        visibility: visible;
+        width: 75%;
+    }
+    .textBar {
+        width: 92%;
+        height: 1em;
+        resize:none;    
+    }
+    .rBtn{
+        visibility: visible;
+    }
+    #btnSwitch{
+        visibility: hidden;
+    }
+    #searchBar{
+        width: 35%;
+    }
+    #searchBar2{
+        width: 80%;
+    }
+    #userBox{
+        height: 97%;
+    }
+    #chatBox{
+        height: 94%;
+    }
+}
+
+/* Message that JP have added!!!*/

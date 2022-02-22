@@ -8,43 +8,27 @@
     <body>
         <h1 style="text-align: center;">FakeMail</h1>
         <div>
-            <div class="inline" style="width: 10%; background-color:deeppink; ">
-                Control panel
+            <div class="inline panel mobileHideC" style="background-color:deeppink; ">
+                Control panel<br>
+                <button class="rBtn" id="btnAdd">Add name</button><br>
+                <button class="rBtn" id="btnEdit">Edit name</button><br>
+                <button class="rBtn" id="btnDel">Remove name</button><br>
+                <button id="btnSwitch">Switch display</button>
             </div>
-            <div class="inline" style="width: 30%; background-color:crimson; ">
+            <div class="inline panel mobileHideR" style="background-color:crimson; ">
                 Recipients:
-                <textarea class="searchBar" type="text" id="searchBar" name="searchRecipent"></textarea>
+                <textarea class="searchBar" type="text" id="searchBar" name="searchRecipent" ></textarea>
                 <button id="btnSearch">Search</button>
                 <button id="btnReset">Reset</button>
-            </div>
-            <div class="inline" style="width: 60%; background-color:darkblue;">
-                Messages:
-                <textarea class="searchBar"type="text" id="searchBar2" name="searchMessage"></textarea>
-                <button id="btnSearch2">Search</button>
-                <button id="btnReset2">Reset</button>
-            </div>
-        </div>
-        <div>
-            <div class="inline panel" style="width: 10%; background-color:deeppink; ">
-                <button id="btnAdd">Add name</button>
-            </div>
-            <div class="inline panel" style="width: 30%;background-color: crimson;">
-                <div id="userBox" class="scrollContainer" style="height: 100%;">
-                    <!-- Test recepients
-                    <li class="userli" style=>List of mail goes here.dfghhgfdsdfghgfdfghjhgfdsdfgh</li>
-                    <li class="userli">List of mail goes here.</li>
-                    -->
+                <div id="userBox" class="scrollContainer" style="border:1px solid #000;">
                 </div>
             </div>
-            <div class="inline panel" style="width: 60%; background-color: darkblue;">
-                
-                <div id="chatBox" class="scrollContainer" style="height: 95%;">
-                    <!-- Test messages
-                    <p class="otherMessage">Name|Date <br>Text box goes here. </p>
-                    <p class="myMessage">Name|Date <br>Text box goes here. </p>
-                    <p class="myMessage">Name|Date <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia veritatis placeat laborum debitis aperiam labore repellendus libero iure, ad vitae obcaecati dolorem harum neque consequatur incidunt cum illo nam maiores!</p>
-                    <p class="otherMessage">Name|Date <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In, ad rerum quisquam reiciendis natus libero voluptas at reprehenderit cumque? Suscipit neque cupiditate unde alias reiciendis adipisci facere autem ipsam et? </p>
-                    -->
+            <div class="inline panel mobileHideM" style="background-color:darkblue;">
+                Messages:
+                <textarea class="searchBar" type="text" id="searchBar2" name="searchMessage"></textarea>
+                <button id="btnSearch2">Search</button>
+                <button id="btnReset2">Reset</button>
+                <div id="chatBox" class="scrollContainer">
                 </div>
                 <div class="bottomBar">
                     <textarea class="textBar"id="textBar" name="text"></textarea>
