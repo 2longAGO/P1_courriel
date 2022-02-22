@@ -36,6 +36,7 @@
 }
 
 .scrollContainer {
+    position: relative;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -69,6 +70,11 @@
         visibility: collapse;
         width: 0%;
     }
+    .textBar {
+        width: 85%;
+        height: 1em;
+        resize:none;    
+    }
     #btnSwitch{
         visibility: visible;
     }
@@ -78,10 +84,11 @@
     #searchBar2{
         width: 50%;
     }
-    .textBar {
-        width: 85%;
-        height: 1em;
-        resize:none;    
+    #userBox{
+        height:98%;
+    }
+    #chatBox{
+        height:96%;
     }
 }
 @media screen and (min-width: 1178px) {
@@ -96,6 +103,14 @@
         visibility: visible;
         width: 75%;
     }
+    .textBar {
+        width: 92%;
+        height: 1em;
+        resize:none;    
+    }
+    .rBtn{
+        visibility: visible;
+    }
     #btnSwitch{
         visibility: hidden;
     }
@@ -105,13 +120,11 @@
     #searchBar2{
         width: 80%;
     }
-    .textBar {
-        width: 92%;
-        height: 1em;
-        resize:none;    
+    #userBox{
+        height: 97%;
     }
-    .rBtn{
-        visibility: visible;
+    #chatBox{
+        height: 94%;
     }
 }
 
