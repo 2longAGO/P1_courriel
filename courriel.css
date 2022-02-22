@@ -33,10 +33,10 @@
     border: 1px solid #000;
     word-wrap:break-word;
     cursor: pointer;
+    position: relative;
 }
 
 .scrollContainer {
-    position: relative;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -85,10 +85,10 @@
         width: 50%;
     }
     #userBox{
-        height:98%;
+        height:94%;
     }
     #chatBox{
-        height:96%;
+        height:89%;
     }
 }
 @media screen and (min-width: 1178px) {
@@ -121,7 +121,7 @@
         width: 80%;
     }
     #userBox{
-        height: 97%;
+        height: 96.7%;
     }
     #chatBox{
         height: 94%;
