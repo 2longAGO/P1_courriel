@@ -27,6 +27,7 @@ document.getElementById("btnReset2").onclick = function() {
 };
 document.getElementById("btnSearch2").onclick = function() {loadMessages(currRecipient,document.querySelector('#searchBar2').value)};
 document.getElementById("btnEdit").onclick = function() {editRecepient(currRecipient);};
+document.getElementById("btnKey").onclick = function() {editKey(currRecipient);};
 document.getElementById("btnDel").onclick = function() {deleteRecipient(currRecipient);};
 document.getElementById("btnSwitch").onclick = function() {
     const selectors = ['.mobileHideR','.mobileHideM'];
@@ -67,7 +68,6 @@ document.getElementById("btnSend").onclick = function() {
 
 // functions
 function setup() {
-    //localStorage.clear();  //Active cette ligne pour du debug
     loadRecepients();
     myName = localStorage.getItem('myName')
     if(!myName){
@@ -163,7 +163,7 @@ function addRecepient() {
 
 function editRecepient(toEdit) {
     Swal.fire({
-        title: 'Enter the new name of the recipient',
+        title: 'Enter the new name of the recipient "'+toEdit+'"',
         input: 'text',
         inputLabel: 'name',
         showCancelButton: true,
@@ -189,6 +189,35 @@ function editRecepient(toEdit) {
     })
 }
 
+function editKey(toEdit) {
+    Swal.fire({
+        title: 'Enter the new key of the recipient "'+toEdit+'"',
+        input: 'text',
+        inputLabel: 'public key',
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if(!value || value === "") {
+                return 'You need to write something!';
+            }
+            else if(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(value)){
+                return "This value isn't valid!";
+            }
+            else{
+                let editArray = getArray("names");
+                for(let i = 0; i < editArray.length; i++){
+                    console.log(editArray[i].name);
+                    if(editArray[i].name == toEdit){
+                        editArray[i].publicKey = value;
+                    }
+                }
+                localStorage.setItem("names",JSON.stringify(editArray));
+                currRecipient = toEdit ;
+                loadRecepients();
+            }
+        }
+    })
+}
+
 function clearChildren(parent){
     while (parent.lastChild) {
         parent.removeChild(parent.lastChild);
@@ -198,10 +227,18 @@ function clearChildren(parent){
 function formatRecipient(toFormat){
     let newElement = document.createElement("li");
     newElement.className = "userli";
-    newElement.setAttribute("onclick",'loadMessages("'+toFormat+'")');
+    newElement.onclick = function() {
+        loadMessages(toFormat);
+        //event.preventDefault();
+    };
+    //newElement.setAttribute("onclick",'loadMessages("'+toFormat+'")');
     newElement.textContent = toFormat;
     let newButton = document.createElement("button")
-    newButton.setAttribute("onclick", 'showPublicKey("'+toFormat+'", false)');
+    newButton.onclick = function(event) {
+        showPublicKey(toFormat);
+        //event.preventDefault();
+    };
+    //newButton.setAttribute("onclick", 'showPublicKey("'+toFormat+'", false)');
     newButton.className = "rightButton";
     newButton.textContent = "Show Public Key";
     newElement.appendChild(newButton);

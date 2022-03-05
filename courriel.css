@@ -1,3 +1,15 @@
+button {
+    border: 1px solid gray;
+    background-color: rgb(255, 255, 255);
+    transition: 0.3s ease;
+    border-radius: 0.5em;
+}
+
+button:hover {
+    background-color: #313744;
+    color: white;
+}
+
 .inline {
     position: relative;
     float: left; 
@@ -36,9 +48,16 @@
     position: relative;
 }
 
+.userli:hover {
+    background-color: #313744;
+    color: yellow;
+}
+
 .scrollContainer {
     overflow-x: hidden;
     overflow-y: auto;
+    border:1px solid #63808e;
+    background-color: #e9eaec;
 }
 
 .bottomBar {
@@ -61,7 +80,7 @@
     size: 100% 30%;
 }
 
-@media only screen and (max-width: 1177px) {
+@media screen and (max-width: 1177px) {
     .mobileHideC{
         width: 10%;
     }
@@ -78,6 +97,9 @@
         height: 1em;
         resize:none;    
     }
+    .rBtn{
+        padding: 2em;
+    }
     #btnSwitch{
         visibility: visible;
     }
@@ -87,14 +109,9 @@
     #searchBar2{
         width: 50%;
     }
-    #userBox{
-        height:94%;
-    }
-    #chatBox{
-        height:89%;
-    }
 }
-@media screen and (min-width: 1178px) {
+
+@media screen and (min-width: 1178px ) {
     .mobileHideC{
         width: 5%;
     }
@@ -123,12 +140,31 @@
     #searchBar2{
         width: 80%;
     }
+}
+
+@media only screen and (max-height: 570px ) {
     #userBox{
-        height: 96.7%;
+        height:94%;
     }
     #chatBox{
-        height: 94%;
+        height:89%;
     }
 }
 
-/* Message that JP have added!!!*/
+@media only screen and (min-height: 570px ) and (max-height: 743px ) {
+    #userBox{
+        height:95%;
+    }
+    #chatBox{
+        height:91%;
+    }
+}
+
+@media screen and (min-height: 744px ) {
+    #userBox{
+        height: 96%;
+    }
+    #chatBox{
+        height: 93%;
+    }
+}
