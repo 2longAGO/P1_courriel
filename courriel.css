@@ -33,11 +33,12 @@ button:hover {
 .otherMessage,.myMessage {
     display: list-item;
     word-break: break-all;
+    border: 0.3em solid #aaa;
     border-radius: 0.2em;
     min-height: 2em;
     max-width: 100%;
     caret-color: transparent;
-    resize:none;    
+    resize:none;  
 }
 
 .userli {
@@ -93,7 +94,7 @@ button:hover {
         visibility: collapse;
         width: 0%;
     }
-    .textBar {
+    #textBar {
         width: 85%;
         height: 1em;
         resize:none;    
@@ -121,13 +122,13 @@ button:hover {
         visibility: visible;
         width: 75%;
     }
-    .textBar {
+    .rBtn{
+        visibility: visible;
+    }
+    #textBar {
         width: 92%;
         height: 1em;
         resize:none;    
-    }
-    .rBtn{
-        visibility: visible;
     }
     #btnSwitch{
         visibility: hidden;
