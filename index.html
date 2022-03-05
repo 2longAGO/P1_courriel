@@ -5,37 +5,38 @@
         <title>FakeMail</title>
         <link rel="stylesheet" href="courriel.css">
     </head>
-    <body>
+    <body style="background-color: #333652;">
         <h1 style="text-align: center;">FakeMail</h1>
         <div>
-            <div class="inline panel mobileHideC" style="background-color:deeppink; ">
+            <div class="inline panel mobileHideC" style="background-color:#efd776; ">
                 Control panel<br>
                 <button class="rBtn" id="btnAdd">Add name</button><br>
                 <button class="rBtn" id="btnEdit">Edit name</button><br>
+                <button class="rBtn" id="btnKey">Edit key</button><br>
                 <button class="rBtn" id="btnDel">Remove name</button><br>
                 <button id="btnSwitch">Switch display</button>
             </div>
-            <div class="inline panel mobileHideR" style="background-color:crimson; ">
+            <div class="inline panel mobileHideR" style="background-color:#90adc6; ">
                 Recipients:
                 <textarea class="searchBar" type="text" id="searchBar" name="searchRecipent" ></textarea>
                 <button id="btnSearch">Search</button>
                 <button id="btnReset">Reset</button>
-                <div id="userBox" class="scrollContainer" style="border:1px solid #000;">
+                <div id="userBox" class="scrollContainer">
                 </div>
             </div>
-            <div class="inline panel mobileHideM" style="background-color:darkblue;">
+            <div class="inline panel mobileHideM" style="background-color:#90adc6;">
                 Messages:
                 <textarea class="searchBar" type="text" id="searchBar2" name="searchMessage"></textarea>
                 <button id="btnSearch2">Search</button>
                 <button id="btnReset2">Reset</button>
-                <div id="chatBox" class="scrollContainer" style="border:1px solid #000;">
+                <div id="chatBox" class="scrollContainer">
                 </div>
                 <div class="bottomBar">
-                    <textarea class="textBar"id="textBar" name="text"></textarea>
+                    <textarea id="textBar" name="text"></textarea>
                     <button id="btnSend">Send</button>
                 </div>
             </div>
         </div>
     </body>
-    <script src="./src/courriel.js"></script> 
+    <script type="module" src="./dist/main.js"></script> 
 </html>
