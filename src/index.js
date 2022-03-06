@@ -284,7 +284,7 @@ function sendMessage() {
         saveMessage(0,msg,currRecipient);
     }
     else {
-        Swal.fire("Nothing was written!");
+        Swal.fire("Cant be sent!");
     }
 }
 
