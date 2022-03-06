@@ -125,7 +125,7 @@ function loadRecepients(toSearch=''){
             loadMessages(currList[0].childNodes[0].textContent);
         }
         else {
-            alert("No result found!");
+            Swal.fire("No result found!");
         }
 
     }
@@ -146,7 +146,7 @@ function addRecepient() {
                 if(storedNames){
                     for (let i = 0; i < storedNames.length; i++) {
                         if(storedNames[i].name==value){
-                            alert("This recipient already exists!");
+                            Swal.fire("This recipient already exists!");
                             return;
                         }
                     }
@@ -283,9 +283,9 @@ function sendMessage() {
         // Save to localStorage
         saveMessage(0,msg,currRecipient);
     }
-    /*else {
-        alert("Nothing was written!");
-    }*/
+    else {
+        Swal.fire("Nothing was written!");
+    }
 }
 
 function formatTime(time){
@@ -375,7 +375,7 @@ function parseData(key){
     try {
         data = JSON.parse(localStorage.getItem(key));
     } catch (error) {
-        alert(key+"("+error.name+"): "+error.message);
+        Swal.fire(key+"("+error.name+"): "+error.message);
         localStorage.setItem(key,"[]");
         data = null
     }
